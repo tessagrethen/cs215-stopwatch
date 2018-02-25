@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tessa's Digital Stopwatch</title>
+    <link rel="stylesheet" href="style-v2.css">
+</head>
+    
+<body>
+    <section class="frame">
+    <h1 id="title">DIGITAL STOPWATCH</h1>
+    <div class="col-narrow" id="buttons">
+        <button id="button-start" onclick="start()">Start</button>
+        <br>
+        <button id="button-stop" onclick="stop()">Stop</button>
+        <br>
+        <button id="button-reset" onclick="reset()">Reset</button>
+        <br>
+    </div>
+    <div class="col-wide" id="stopwatch">
+        <p id="timer"><span id="minutes">00</span> : <span id="seconds">00</span> <span id="milliseconds">00</span></p>
+    </div>
+    <div id="stops">
+        <h3>Laps</h3>
+        <ol id="stop-list">
+        </ol>
+    </div>
+    <div id="navigation">
+            <h5>Don't like this layout? Switch to the <a id="v1" href="../version1/index-v1.html">online version</a>!</h5>
+    </div>
+    </section>
+    
+    <section class="footer">
+        <p>&copy; <a id="webpage" href="https://www.linkedin.com/in/tessagrethen/">Tessa Pham</a> | CS H215: Human Computer Interaction</p>
+    </section>
+    
+    <script>
+        var status = 0;
+        var time = 0;
+        var stopList = document.getElementById("stop-list");
+
+        function timer() {
+            if (status == 1) {
+                setTimeout(function() {
+                    time++;
+                    var min = Math.floor(time / 100 / 60);
+                    var sec = Math.floor(time / 100);
+                    var msec = time % 100;
+
+                    if (min < 10) {
+                        min = "0" + min;
+                    }
+                    if (sec >= 60) {
+                        sec = sec % 60;
+                    }
+                    if (sec < 10) {
+                        sec = "0" + sec;
+                    }
+                    if (msec < 10) {
+                        msec = "0" + msec;
+                    }
+
+                    document.getElementById("minutes").innerHTML = min;
+                    document.getElementById("seconds").innerHTML = sec;
+                    document.getElementById("milliseconds").innerHTML = msec;
+                    
+                    timer();
+                }, 10);
+            }
+        }
+
+        function start() {
+            status = 1;
+            document.getElementById("button-start").disabled = true;
+            timer();
+        }
+
+        function stop() {
+            status = 0;
+            document.getElementById("button-start").disabled = false;
+            addStop();
+        }
+        
+        function addStop() {
+            var currentStop, currentMin, currentSec, currentMsec;
+            var entry = document.createElement("li")
+            currentMin = document.getElementById("minutes").innerHTML;
+            currentSec = document.getElementById("seconds").innerHTML;
+            currentMsec = parseInt(document.getElementById("milliseconds").innerHTML) + 1;
+            if (currentMsec < 10) {
+                currentMsec = "0" + currentMsec;
+            }
+            currentStop = currentMin + " : " + currentSec + " : " + currentMsec;
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(currentStop));
+            stopList.appendChild(li);
+        }
+        
+        function resetStop() {
+            stopList.innerHTML = "";
+        }
+
+        function reset() {
+            status = 0;
+            time = -1;
+            document.getElementById("button-start").disabled = false;
+            document.getElementById("minutes").innerHTML = "00";
+            document.getElementById("seconds").innerHTML = "00";
+            document.getElementById("milliseconds").innerHTML = "00";
+            resetStop();
+        }
+    </script>
+    <!-- JS code referenced and modified from: http://codingwithsara.com/stopwatch-with-javascript/ -->
+</body>
+</html>

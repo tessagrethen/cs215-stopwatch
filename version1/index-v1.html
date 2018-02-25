@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tessa's Online Stopwatch</title>
+    <link rel="stylesheet" href="style-v1.css">
+</head>
+    
+<body>
+    <section class="frame">
+    <div id="stopwatch">
+        <h1 id="title">ONLINE STOPWATCH</h1>
+        <p id="timer"><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">00</span></p>
+    </div>
+    <div id="buttons">
+        <button id="button-start" onclick="start()">Start</button>
+        <button id="button-stop" onclick="stop()">Stop</button>
+        <button id="button-reset" onclick="reset()">Reset</button>
+    </div>
+    <div id="navigation">
+        <h5>Don't like this layout? Switch to the <a href="../version2/index-v2.html">digital version</a>!</h5>
+    </div>
+    </section>
+    
+    <section class="footer">
+        <p>&copy; <a id="webpage" href="https://www.linkedin.com/in/tessagrethen/">Tessa Pham</a> | CS H215: Human Computer Interaction</p>
+    </section>
+    
+    <script>
+        var status = 0;
+        var time = 0;
+
+        function timer() {
+            if (status == 1) {
+                setTimeout(function() {
+                    time++;
+                    var min = Math.floor(time / 100 / 60);
+                    var sec = Math.floor(time / 100);
+                    var msec = time % 100;
+
+                    if (min < 10) {
+                        min = "0" + min;
+                    }
+                    if (sec >= 60) {
+                        sec = sec % 60;
+                    }
+                    if (sec < 10) {
+                        sec = "0" + sec;
+                    }
+                    if (msec < 10) {
+                        msec = "0" + msec;
+                    }
+
+                    document.getElementById("minutes").innerHTML = min;
+                    document.getElementById("seconds").innerHTML = sec;
+                    document.getElementById("milliseconds").innerHTML = msec;
+
+                    timer();
+                }, 10);
+            }
+        }
+
+        function start() {
+            status = 1;
+            document.getElementById("button-start").disabled = true;
+            timer();
+        }
+
+        function stop() {
+            status = 0;
+            document.getElementById("button-start").disabled = false;
+        }
+
+        function reset() {
+            status = 0;
+            time = -1;
+            document.getElementById("button-start").disabled = false;
+            document.getElementById("minutes").innerHTML = "00";
+            document.getElementById("seconds").innerHTML = "00";
+            document.getElementById("milliseconds").innerHTML = "00";
+        }
+    </script>
+    <!-- JS code referenced and modified from: http://codingwithsara.com/stopwatch-with-javascript/ -->
+</body>
+</html>

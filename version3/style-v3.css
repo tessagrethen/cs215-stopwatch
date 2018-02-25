@@ -1,0 +1,103 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    color: black;
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+button {
+    border: 0;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 15px 25px;
+}
+
+a:link {
+    color: #000000;
+}
+
+a:visited {
+    color: #000000;
+}
+
+a:hover {
+    color: #808080;
+}
+
+span {
+    display: inline-block;
+}
+
+.frame {
+    margin: 0 auto;
+    padding: 80px 0;
+}
+
+#stopwatch {
+    font-size: 2.5em;
+}
+
+#title {
+    font-size: 4.5em;
+    margin-bottom: 50px;
+}
+
+#timer {
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 60px;
+}
+
+#minutes {
+    font-size: 2em;
+}
+
+#seconds {
+    font-size: 1em;
+}
+
+#milliseconds {
+    font-size: 2em;
+}
+
+#buttons {
+    margin-top: 60px;
+}
+
+
+#button-start {
+    background-color: #000000;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#button-start:hover {
+    background-color: #00CC00;
+}
+
+#button-stop {
+    background-color: #000000;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#button-stop:hover {
+    background-color: #D11919;
+}
+
+#button-reset {
+    background-color: #000000;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#button-reset:hover {
+    background-color: #808080;
+}
+
+#navigation {
+    font-size: 1.8em;
+}
